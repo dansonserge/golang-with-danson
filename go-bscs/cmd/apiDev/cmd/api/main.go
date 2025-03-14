@@ -1,11 +1,10 @@
 package main
-import (
-	"fmt"
-	"net/http"
 
-	"github.com/go-chi/chi"
+import (
 	log "github.com/sirupsen/logrus"
 )
 func main() {
+
+	log.SetReportCaller(true)
 
 }
