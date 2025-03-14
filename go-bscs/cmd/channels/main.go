@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"time"
-
-	"golang.org/x/exp/rand"
 )
 
 var MAX_CHICKEN_PRICE = 5;
@@ -21,13 +20,13 @@ func main() {
 
 	}
 
-	sendMessage(webWithChickenDealChannel)
+	sendMessage(webWithChickenDealChannel, webWithTofuDealChannel)
 }
 
 func checkChickenPrices(website string, webWithChickenDealChannel chan string){
 	for {
 		time.Sleep(time.Second+1)
-		var chickenPrice = rand.Float32()*20
+		var chickenPrice = rand.Int()*20
 		if chickenPrice <= MAX_CHICKEN_PRICE{
 			webWithChickenDealChannel <- website
 			break
@@ -38,7 +37,7 @@ func checkChickenPrices(website string, webWithChickenDealChannel chan string){
 func checkTofuPrices(website string, webWithTofuDealChannel chan string){
 	for {
 		time.Sleep(time.Second+1)
-		var tofuPrice = rand.Float32()*20
+		var tofuPrice = rand.Int()*20
 		if tofuPrice <= MAX_TOFU_PRICE{
 			webWithTofuDealChannel <- website
 			break
