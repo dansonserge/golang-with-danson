@@ -40,9 +40,6 @@ func structGenetics() {
 
 	fmt.Printf("car1: %v", gasCar.carMake)
 	fmt.Printf("car2: %v", evCar.carMake)
-
-
-
 }
 
 
