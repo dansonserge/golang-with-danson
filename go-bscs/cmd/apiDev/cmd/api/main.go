@@ -1,10 +1,10 @@
 package main
 
 import (
+	"apiDev/internal/handlers"
 	"fmt"
 	"net/http"
 
-	"github.com/dansonserge/golang-with-danson/go-bscs/cmd/apiDev/internal/handlers"
 	"github.com/go-chi/chi"
 	log "github.com/sirupsen/logrus"
 )

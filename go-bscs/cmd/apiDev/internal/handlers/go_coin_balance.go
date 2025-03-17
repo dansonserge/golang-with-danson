@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/dansonserge/go-with-danson/go-bscs/cmd/apiDev/api"
-	"github.com/dansonserge/go-with-danson/go-bscs/cmd/apiDev/internal/tools"
-	log "github.com/sirupsen/logrus"
+	"apiDev/api"
+	"apiDev/internal/tools"
+
 	"github.com/gorilla/schema"
+	log "github.com/sirupsen/logrus"
 )
 
 func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
