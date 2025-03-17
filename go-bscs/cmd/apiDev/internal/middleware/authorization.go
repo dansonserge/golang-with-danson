@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/dansonserge/go-with-danson/go-bscs/cmd/apiDev/api"
-	"github.com/dansonserge/go-with-danson/go-bscs/cmd/apiDev/internal/tools"
+	"apiDev/api"
+	"apiDev/internal/tools"
+
 	log "github.com/sirupsen/logrus"
 )
 

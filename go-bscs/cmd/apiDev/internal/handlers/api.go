@@ -1,7 +1,8 @@
 package handlers
 
 import (
-	"github.com/dansonserge/go-with-danson/go-bscs/cmd/apiDev/internal/middleware"
+	"apiDev/internal/middleware"
+
 	"github.com/go-chi/chi"
 	chimiddle "github.com/go-chi/chi/middleware"
 )
