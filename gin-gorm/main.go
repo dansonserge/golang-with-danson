@@ -11,8 +11,5 @@ func main() {
 
 	routes.UserRoute(router)
 
-	/* router.GET("/", func(c *gin.Context){
-		c.String(200, "Hello world!")
-	}) */
 	router.Run(":8001")
 }
