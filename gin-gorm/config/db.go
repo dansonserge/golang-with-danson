@@ -19,5 +19,4 @@ func Connect() {
 
 	db.AutoMigrate(&models.User{})
 	DB = db
-
 }

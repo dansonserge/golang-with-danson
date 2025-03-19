@@ -1,7 +1,32 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"gin-gorm/config"
+	"gin-gorm/models"
 
-func UserController(c *gin.Context) {
-	c.String(200, "this is the user controller!")
+	"github.com/gin-gonic/gin"
+)
+
+func GetUser(c *gin.Context) {
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
+}
+
+func CreateUser(c *gin.Context) {
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
+}
+
+func DeleteUser(c *gin.Context) {
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
+}
+
+func UpdateUser(c *gin.Context) {
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
 }
