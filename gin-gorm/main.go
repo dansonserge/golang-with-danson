@@ -11,6 +11,5 @@ func main() {
 	router := gin.Default()
 	config.Connect()
 	routes.UserRoute(router)
-
 	router.Run(":8001")
 }
