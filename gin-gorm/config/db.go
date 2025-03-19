@@ -10,7 +10,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	dsn := "postgres://postgres:1q2w3e4r@gin_gorm_db:5432/gin_gorm_db?sslmode=disable"
+	dsn := "postgres://admin:1q2w3e4r@localhost:5431/gin_gorm_db?sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {

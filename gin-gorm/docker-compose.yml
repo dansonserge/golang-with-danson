@@ -1,63 +1,35 @@
-version: "3.9" # Specify Docker Compose version
-
+version: "3.9"
 services:
-  # PostgreSQL Database Service
-  postgres:
-    image: postgres:15 # Use PostgreSQL version 15 (stable and recent as of March 2025)
+  db:
+    image: postgres:15
     container_name: gin_gorm_db
     environment:
-      POSTGRES_USER: admin # Database username
-      POSTGRES_PASSWORD: password # Database password (change in production!)
-      POSTGRES_DB: gin_gorm_db # Default database name
-    ports:
-      - "5432:5432" # Map host port 5432 to container port 5432
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1q2w3e4r
+      POSTGRES_DB: gin_gorm_db
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Persist data in a named volume
-    restart: unless-stopped # Restart policy for resilience
-    healthcheck: # Ensure the DB is ready before dependent services start
-      test: ["CMD-SHELL", "pg_isready -U admin -d gin_gorm_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5431:5432"
 
-  # Example Task Service (uncomment and adjust as needed)
-  # task-service:
-  #   build:
-  #     context: ./task-service  # Path to your Task Service directory with Dockerfile
-  #     dockerfile: Dockerfile
-  #   container_name: task_service
-  #   ports:
-  #     - "8080:8080"  # Map Task Service port
-  #   environment:
-  #     DB_HOST: postgres      # Link to Postgres service
-  #     DB_PORT: 5432
-  #     DB_USER: admin
-  #     DB_PASSWORD: password
-  #     DB_NAME: taskdb
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy  # Wait for Postgres to be ready
-  #   restart: unless-stopped
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gin_gorm_app
+    environment:
+      DB_HOST: db
+      DB_PORT: 5431
+      DB_USER: admin
+      DB_PASSWORD: 1q2w3e4r
+      DB_NAME: gin_gorm_db
+    depends_on:
+      - db
+    ports:
+      - "8001:8080"
+    volumes:
+      - .:/app
 
-  # Example User Service (uncomment and adjust as needed)
-  # user-service:
-  #   build:
-  #     context: ./user-service  # Path to your User Service directory with Dockerfile
-  #     dockerfile: Dockerfile
-  #   container_name: user_service
-  #   ports:
-  #     - "8081:8081"  # Map User Service port
-  #   environment:
-  #     DB_HOST: postgres      # Link to Postgres service
-  #     DB_PORT: 5432
-  #     DB_USER: admin
-  #     DB_PASSWORD: password
-  #     DB_NAME: taskdb
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy  # Wait for Postgres to be ready
-  #   restart: unless-stopped
-
-# Define named volumes for data persistence
 volumes:
-  postgres_data:
+  db_data:
