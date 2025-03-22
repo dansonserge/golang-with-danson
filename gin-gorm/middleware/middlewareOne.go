@@ -22,3 +22,16 @@ func LoggerMiddleware() gin.HandlerFunc {
 
 	}
 }
+
+func CustomRecovery() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("Recovered from panic: %v\n", err)
+				c.JSON(500, gin.H{"error": "Internal Server Error"})
+				c.Abort()
+			}
+		}()
+		c.Next()
+	}
+}
